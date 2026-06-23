@@ -1,0 +1,6 @@
+<% updatedItems.forEach(item => { %>
+  <!-- OOB Swap for the affected row -->
+  <tbody hx-swap-oob="outerHTML:#row-<%= item.id %>">
+    <%- include('row', { item, getStatus }) %>
+  </tbody>
+<% }) %>

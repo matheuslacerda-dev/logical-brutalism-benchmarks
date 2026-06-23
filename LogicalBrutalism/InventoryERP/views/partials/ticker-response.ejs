@@ -1,0 +1,13 @@
+<% if (orderResult) { %>
+  <%- include('ticker-item', { order: orderResult }) %>
+
+  <!-- OOB Swap for the affected row -->
+  <tbody hx-swap-oob="outerHTML:#row-<%= orderResult.item.id %>">
+    <%- include('row', { item: orderResult.item, getStatus }) %>
+  </tbody>
+
+  <!-- OOB Swap for the chart -->
+  <div id="turnover-chart" hx-swap-oob="true" class="flex-1 flex items-end gap-2 p-2 relative">
+    <%- include('chart', { demandTracker }) %>
+  </div>
+<% } %>

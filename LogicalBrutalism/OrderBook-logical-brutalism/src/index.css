@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Iosevka:wght@400;700&display=swap');
+@import "../static/css/logical-brutalism.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-void);
+  color: var(--color-text);
+}

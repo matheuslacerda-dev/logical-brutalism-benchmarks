@@ -1,0 +1,15 @@
+@import '@mantine/core/styles.css';
+@import '@mantine/charts/styles.css';
+
+:root {
+  --background: #1a1b1e;
+  --foreground: #c1c2c5;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}

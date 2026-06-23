@@ -1,0 +1,11 @@
+{
+  "name": "caseslb-monorepo",
+  "private": true,
+  "workspaces": [
+    "AntDesign/*",
+    "Chakra/*",
+    "LogicalBrutalism/*",
+    "Mantine/*",
+    "MaterialDesign/*"
+  ]
+}

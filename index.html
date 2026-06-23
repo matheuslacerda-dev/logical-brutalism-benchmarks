@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Logical Brutalism :: Benchmarks{% endblock %}
+
+{% block content %}
+<header class="mb-12 border border-lb-surface bg-lb-void p-6">
+    <h1 class="font-code text-lb-amber text-xl uppercase tracking-widest mb-4 border-b border-lb-surface pb-2 inline-block">
+        Logical Brutalism: Empirical Benchmarks
+    </h1>
+    <p class="font-struct text-lb-text text-base max-w-3xl mt-2">
+        Empirical performance tests comparing the "Logical Brutalism" stack (Python/FastAPI + HTMX + Alpine.js) 
+        against modern Virtual DOM SPAs (React + MUI) under high-frequency WebSocket stress.
+    </p>
+</header>
+
+<section>
+    <h2 class="font-code text-lb-text text-lg uppercase tracking-wider mb-4">Benchmark Applications</h2>
+    <div class="border border-lb-surface overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-lb-surface text-lb-void font-code text-sm uppercase tracking-wider">
+                    <th class="border border-lb-surface p-3 font-semibold">Framework</th>
+                    <th class="border border-lb-surface p-3 font-semibold">Application</th>
+                    <th class="border border-lb-surface p-3 font-semibold">Action</th>
+                </tr>
+            </thead>
+            <tbody class="font-struct text-base text-lb-text">
+                <!-- AntDesign -->
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">AntDesign</td>
+                    <td class="border border-lb-surface p-3">Centro de Controle de Servidores</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/AntDesign/Centro de Controle de Servidores" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">AntDesign</td>
+                    <td class="border border-lb-surface p-3">Dashboard Financeiro</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/AntDesign/Dashboard Financeiro" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">AntDesign</td>
+                    <td class="border border-lb-surface p-3">InventoryERP</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/AntDesign/InventoryERP" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">AntDesign</td>
+                    <td class="border border-lb-surface p-3">OrderBook</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/AntDesign/OrderBook-antdesign" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+
+                <!-- Chakra UI -->
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Chakra UI</td>
+                    <td class="border border-lb-surface p-3">Centro de Controle de Servidores</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Chakra/Centro de Controle de Servidores" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Chakra UI</td>
+                    <td class="border border-lb-surface p-3">Dashboard Financeiro</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Chakra/Dashboard Financeiro" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Chakra UI</td>
+                    <td class="border border-lb-surface p-3">InventoryERP</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Chakra/InventoryERP" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Chakra UI</td>
+                    <td class="border border-lb-surface p-3">OrderBook</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Chakra/OrderBook-chakra" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+
+                <!-- Logical Brutalism -->
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3 text-lb-amber font-code">Logical Brutalism</td>
+                    <td class="border border-lb-surface p-3">Centro de Controle de Servidores</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/LogicalBrutalism/Centro de Controle de Servidores" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3 text-lb-amber font-code">Logical Brutalism</td>
+                    <td class="border border-lb-surface p-3">Dashboard Financeiro</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/LogicalBrutalism/Dashboard Financeiro" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3 text-lb-amber font-code">Logical Brutalism</td>
+                    <td class="border border-lb-surface p-3">InventoryERP</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/LogicalBrutalism/InventoryERP" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3 text-lb-amber font-code">Logical Brutalism</td>
+                    <td class="border border-lb-surface p-3">OrderBook</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/LogicalBrutalism/OrderBook-logical-brutalism" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+
+                <!-- Mantine -->
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Mantine</td>
+                    <td class="border border-lb-surface p-3">Centro de Controle de Servidores</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Mantine/Centro de Controle de Servidores" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Mantine</td>
+                    <td class="border border-lb-surface p-3">Dashboard Financeiro</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Mantine/Dashboard Financeiro" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Mantine</td>
+                    <td class="border border-lb-surface p-3">InventoryERP</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Mantine/InventoryERP" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Mantine</td>
+                    <td class="border border-lb-surface p-3">OrderBook</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/Mantine/OrderBook-mantine" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+
+                <!-- Material Design -->
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Material Design</td>
+                    <td class="border border-lb-surface p-3">Centro de Controle de Servidores</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/MaterialDesign/Centro de Controle de Servidores" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Material Design</td>
+                    <td class="border border-lb-surface p-3">Dashboard Financeiro</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/MaterialDesign/Dashboard Financeiro" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Material Design</td>
+                    <td class="border border-lb-surface p-3">InventoryERP</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/MaterialDesign/InventoryERP" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+                <tr class=" transition-none group">
+                    <td class="border border-lb-surface p-3">Material Design</td>
+                    <td class="border border-lb-surface p-3">OrderBook</td>
+                    <td class="border border-lb-surface p-3 text-center">
+                        <a target="_blank" href="/MaterialDesign/OrderBook-material-design" class="font-code text-lb-amber group-hover:text-lb-void border border-lb-amber group-hover:border-lb-void px-2 py-1 uppercase text-xs inline-block">[ LAUNCH ]</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

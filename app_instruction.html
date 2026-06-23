@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Logical Brutalism :: App Instruction{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl border border-lb-surface bg-lb-void p-8 mt-8">
+    <h1 class="font-code text-lb-amber text-xl uppercase tracking-widest mb-6 border-b border-lb-surface pb-2 inline-block">
+        [SYS_REQ] Launch Benchmark
+    </h1>
+    
+    <div class="font-struct text-lb-text text-base mb-6">
+        <p class="mb-4">You have selected to launch the following benchmark application:</p>
+        <table class="w-full text-left border-collapse border border-lb-surface mb-6">
+            <tr>
+                <th class="border border-lb-surface p-2 bg-lb-surface text-lb-void font-code">FRAMEWORK</th>
+                <td class="border border-lb-surface p-2">{{ framework }}</td>
+            </tr>
+            <tr>
+                <th class="border border-lb-surface p-2 bg-lb-surface text-lb-void font-code">APPLICATION</th>
+                <td class="border border-lb-surface p-2">{{ app_name }}</td>
+            </tr>
+        </table>
+
+        <p class="mb-2 text-lb-amber">To run this environment locally, open a new terminal tab and execute the following sequence:</p>
+        
+        <div class="bg-black border border-lb-surface p-4 mt-2 mb-6">
+            <code class="font-code text-lb-text block mb-2">$ cd "{{ framework }}/{{ app_name }}"</code>
+            <code class="font-code text-lb-text block mb-2">$ npm install</code>
+            <code class="font-code text-lb-text block">$ npm run dev</code>
+        </div>
+        
+        <p class="text-sm">Once the server is running, the application will be available at <a href="http://localhost:3000" target="_blank" class="text-lb-amber underline hover:bg-lb-amber hover:text-lb-void px-1">http://localhost:3000</a>.</p>
+    </div>
+</div>
+{% endblock %}

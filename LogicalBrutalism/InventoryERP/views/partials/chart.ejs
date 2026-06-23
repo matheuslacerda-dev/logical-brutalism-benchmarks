@@ -1,0 +1,20 @@
+<% 
+  const categories = Object.keys(demandTracker);
+  const maxDemand = Math.max(...Object.values(demandTracker), 10); // at least 10 to avoid full bars initially
+%>
+
+<% categories.forEach(cat => { %>
+  <% const value = demandTracker[cat]; %>
+  <% const heightPct = Math.floor((value / maxDemand) * 100); %>
+  <div class="flex flex-col items-center flex-1 h-full justify-end group">
+    <div class="w-full bg-lb-surface relative transition-all duration-300 ease-in-out group-hover:bg-lb-amber" 
+         style="height: <%= heightPct %>%; min-height: 1px;">
+      <span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[0.65rem] text-lb-amber font-code">
+        <%= value %>
+      </span>
+    </div>
+    <div class="text-[0.65rem] mt-1 font-code text-lb-surface uppercase border-t border-lb-surface w-full text-center pt-1">
+      <%= cat %>
+    </div>
+  </div>
+<% }) %>

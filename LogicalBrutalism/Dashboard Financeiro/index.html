@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logical Brutalism</title>
+
+  <!-- Absolute Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Iosevka+Aile:wght@400;500;600;700&family=Iosevka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Parasitic Dependencies (HTMX/Alpine) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+  <!-- Central Visual Matrix -->
+  <link rel="stylesheet" href="/static/css/logical-brutalism.css">
+
+  <!-- Tailwind Hook with Brutalist Plugin -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/static/js/logical-brutalism-tailwind.js"></script>
+
+  <!-- Lightweight Charts for Detailed Financial Data -->
+  <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'lb-void': 'var(--color-void)',
+            'lb-amber': 'var(--color-amber)',
+            'lb-surface': 'var(--color-surface)',
+            'lb-text': 'var(--color-text)',
+            'lb-white': 'var(--color-white)',
+            'lb-error': 'var(--color-error)',
+          },
+          fontFamily: {
+            'struct': ['Iosevka Aile', 'sans-serif'],
+            'code': ['Iosevka', 'monospace'],
+          }
+        }
+      },
+      corePlugins: {
+        borderRadius: false,
+        transitionProperty: false,
+        transitionDuration: false,
+        transitionTimingFunction: false,
+        transitionDelay: false,
+        animation: false,
+      }
+    }
+  </script>
+</head>
+<body class="bg-lb-void text-lb-text font-struct p-8">
+
+  <!-- Dashboard Header -->
+  <header class="max-w-6xl mx-auto mb-8 border-b border-lb-surface pb-4 mt-6">
+    <div class="flex justify-between items-end">
+      <div>
+        <h1 class="font-code text-lb-white text-3xl uppercase tracking-widest">
+          LOGICAL BRUTALISM
+        </h1>
+        <p class="font-struct text-lb-text text-sm mt-1">
+          Real-time financial stream via Yahoo Finance API
+        </p>
+      </div>
+      <div class="hidden md:block">
+        <code class="font-code text-lb-amber text-xs uppercase bg-lb-surface px-2 py-1">STATUS: ONLINE</code>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Grid (Populated by HTMX) -->
+  <main class="max-w-6xl mx-auto">
+    <div class="border border-lb-surface bg-lb-void p-6 min-h-[400px]">
+      
+      <!-- HTMX Polling Container -->
+      <div 
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        hx-get="/api/quotes"
+        hx-trigger="load, every 5s"
+        hx-swap="innerHTML"
+      >
+        <!-- Initial Loading State -->
+        <div class="col-span-full flex flex-col items-center justify-center py-20">
+          <div class="font-code text-lb-amber text-lg animate-pulse mb-4">[ESTABLISHING_CONNECTION...]</div>
+          <div class="font-code text-lb-text text-xs uppercase border border-lb-surface px-4 py-2">Waiting for first data chunk</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detailed View Container -->
+    <div id="detailed-view" class="mt-6 border border-lb-surface bg-lb-void empty:hidden">
+      <!-- Detailed chart and presets will be loaded here via HTMX -->
+    </div>
+
+    <div class="mt-6 border-t border-lb-surface pt-4 max-w-6xl mx-auto text-center md:text-left">
+      <code class="font-code text-lb-text text-[10px] uppercase">POWERED BY LOGICAL BRUTALISM & YAHOO FINANCE API</code>
+    </div>
+  </main>
+
+    <!-- Performance Benchmark Script -->
+    <script src="/static/js/benchmark.js"></script>
+</body>
+</html>

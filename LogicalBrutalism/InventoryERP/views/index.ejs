@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP Matrix :: Inventory</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Iosevka+Aile:wght@400;500;600;700&family=Iosevka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+  <link rel="stylesheet" href="/static/css/logical-brutalism.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/static/js/logical-brutalism-tailwind.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'lb-void': 'var(--color-void)',
+            'lb-amber': 'var(--color-amber)',
+            'lb-surface': 'var(--color-surface)',
+            'lb-text': 'var(--color-text)',
+            'lb-white': 'var(--color-white)',
+            'lb-error': 'var(--color-error)',
+            'lb-success': '#4ade80', // Custom brutalist green
+            'lb-critical': '#f87171' // Custom brutalist red
+          },
+          fontFamily: {
+            'struct': ['Iosevka Aile', 'sans-serif'],
+            'code': ['Iosevka', 'monospace'],
+          }
+        }
+      },
+      corePlugins: {
+        borderRadius: false,
+        transitionProperty: false,
+        transitionDuration: false,
+        transitionTimingFunction: false,
+        transitionDelay: false,
+        animation: false,
+      }
+    }
+
+    // Performance hooks injected into HTMX lifecycle
+    document.addEventListener('htmx:beforeSwap', function(evt) {
+      performance.mark('htmx-swap-start-' + evt.detail.target.id);
+    });
+
+    document.addEventListener('htmx:afterSwap', function(evt) {
+      performance.mark('htmx-swap-end-' + evt.detail.target.id);
+      try {
+        performance.measure(
+          'htmx-swap-duration-' + evt.detail.target.id,
+          'htmx-swap-start-' + evt.detail.target.id,
+          'htmx-swap-end-' + evt.detail.target.id
+        );
+        const measures = performance.getEntriesByName('htmx-swap-duration-' + evt.detail.target.id);
+        console.log(`[PERFORMANCE] Target #${evt.detail.target.id} swapped in ${measures[measures.length - 1].duration.toFixed(2)}ms`);
+      } catch (e) { }
+    });
+  </script>
+  <style>
+    /* Absolute density optimizations */
+    td, th { padding: 0.25rem 0.5rem; border: 1px solid var(--color-surface); white-space: nowrap; }
+    th { background: var(--color-surface); color: var(--color-amber); font-family: 'Iosevka', monospace; text-align: left; text-transform: uppercase; font-size: 0.75rem;}
+    td { font-size: 0.8rem; }
+    input[type="text"] { background: var(--color-void); border: 1px solid var(--color-surface); color: var(--color-text); padding: 0.25rem 0.5rem; outline: none; }
+    input[type="text"]:focus { border-color: var(--color-amber); }
+    button { background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-surface); padding: 0.25rem 0.75rem; text-transform: uppercase; font-family: 'Iosevka', monospace; font-size: 0.75rem; cursor: pointer;}
+    button:hover { background: var(--color-text); color: var(--color-void); }
+  </style>
+</head>
+<body class="bg-lb-void text-lb-text font-struct p-4 h-screen flex flex-col overflow-hidden" x-data="{ mountStart: performance.now() }" x-init="console.log('[PERFORMANCE] Initial DOM Mount:', (performance.now() - mountStart).toFixed(2) + 'ms')">
+
+  <header class="flex justify-between items-center border-b border-lb-surface pb-2 mb-4">
+    <h1 class="font-code text-lb-amber text-xl uppercase tracking-widest">
+      Logical Brutalism
+    </h1>
+    <div class="text-xs font-code text-lb-surface" id="system-clock" x-data="{ time: new Date().toLocaleTimeString('pt-BR') }" x-init="setInterval(() => time = new Date().toLocaleTimeString('pt-BR'), 1000)" x-text="time"></div>
+  </header>
+
+  <div class="flex flex-1 gap-4 overflow-hidden">
+    
+    <!-- LEFT PANEL: TABLE AND ACTIONS -->
+    <main class="flex-[3] flex flex-col overflow-hidden border border-lb-surface p-2 relative">
+      <div class="flex justify-between items-end mb-2">
+        <div class="flex items-center gap-2">
+          <input type="text" name="search" placeholder="FILTER SKUS..." 
+                 hx-get="/api/inventory" 
+                 hx-target="#table-body" 
+                 hx-trigger="keyup changed delay:100ms"
+                 class="w-64 font-code text-xs">
+          <button hx-get="/api/inventory?search=" hx-target="#table-body" onclick="document.querySelector('input[name=search]').value=''">RESET</button>
+        </div>
+        <button form="bulk-form" type="submit" class="text-lb-amber border-lb-amber hover:bg-lb-amber hover:text-lb-void">
+          [ DISPARAR ORDEM DE COMPRA ]
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-auto border border-lb-surface">
+        <form id="bulk-form" hx-post="/api/bulk-order" hx-target="#bulk-null-target" hx-swap="none">
+          <table class="w-full text-left border-collapse">
+            <thead class="sticky top-0 z-10">
+              <tr>
+                <th class="w-8 text-center">SEL</th>
+                <th>SKU_ID</th>
+                <th>NOME DO ITEM</th>
+                <th>CATEGORIA</th>
+                <th class="text-right">ESTOQUE</th>
+                <th class="text-right">PREÇO_UN</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="table-body" class="font-code">
+              <%- include('partials/table-body', { inventory, getStatus }) %>
+            </tbody>
+          </table>
+        </form>
+        <div id="bulk-null-target" class="hidden"></div>
+      </div>
+    </main>
+
+    <!-- RIGHT PANEL: TICKER AND CHART -->
+    <aside class="flex-[1] flex flex-col gap-4 overflow-hidden">
+      
+      <!-- ORDER TICKER -->
+      <div class="border border-lb-surface p-2 flex flex-col h-1/2">
+        <h2 class="font-code text-xs text-lb-amber uppercase mb-2 border-b border-lb-surface pb-1">Fluxo de Pedidos Síncrono</h2>
+        <div id="ticker-container" 
+             class="flex-1 overflow-hidden flex flex-col gap-1 text-xs font-code"
+             hx-get="/api/ticker" 
+             hx-trigger="every 4s" 
+             hx-swap="beforeend">
+          <!-- Ticker items will be appended here -->
+        </div>
+      </div>
+
+      <!-- TURNOVER CHART -->
+      <div class="border border-lb-surface p-2 flex flex-col h-1/2">
+        <h2 class="font-code text-xs text-lb-amber uppercase mb-2 border-b border-lb-surface pb-1">Giro de Estoque (Demanda)</h2>
+        <div class="flex-1 flex items-end gap-2 p-2 relative" id="turnover-chart">
+          <%- include('partials/chart', { demandTracker }) %>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <%- include('partials/benchmark-analyzer') %>
+
+</body>
+</html>

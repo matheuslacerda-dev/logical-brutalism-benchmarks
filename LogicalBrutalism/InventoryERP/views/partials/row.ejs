@@ -1,0 +1,19 @@
+<% const status = getStatus(item.stock); %>
+<% const statusColor = status === 'Esgotado' ? 'text-lb-critical border-lb-critical' : status === 'Crítico' ? 'text-lb-amber border-lb-amber' : 'text-lb-success border-lb-success'; %>
+<tr id="row-<%= item.id %>" class="hover:bg-lb-surface transition-colors duration-0">
+  <td class="text-center border-b border-lb-surface">
+    <input type="checkbox" name="selected" value="<%= item.id %>" class="accent-lb-amber">
+  </td>
+  <td class="border-b border-lb-surface text-lb-surface font-bold"><%= item.id %></td>
+  <td class="border-b border-lb-surface truncate max-w-[200px]" title="<%= item.name %>"><%= item.name %></td>
+  <td class="border-b border-lb-surface text-lb-surface text-xs"><%= item.category %></td>
+  <td class="border-b border-lb-surface text-right font-bold <%= item.stock <= 10 ? 'text-lb-amber' : '' %> <%= item.stock === 0 ? 'text-lb-critical' : '' %>">
+    <%= item.stock %>
+  </td>
+  <td class="border-b border-lb-surface text-right">$<%= item.price.toFixed(2) %></td>
+  <td class="border-b border-lb-surface">
+    <span class="border px-1 text-[0.65rem] uppercase tracking-wider <%= statusColor %>">
+      <%= status %>
+    </span>
+  </td>
+</tr>

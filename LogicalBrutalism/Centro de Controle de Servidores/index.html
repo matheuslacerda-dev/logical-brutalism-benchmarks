@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logical Brutalism :: Server Control Center</title>
+
+  <!-- Absolute Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Iosevka+Aile:wght@400;500;600;700&family=Iosevka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Parasitic Dependencies (HTMX/Alpine) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+  <!-- Central Visual Matrix -->
+  <link rel="stylesheet" href="/static/css/logical-brutalism.css">
+
+  <!-- Tailwind Hook with Brutalist Plugin -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/static/js/logical-brutalism-tailwind.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'lb-void': 'var(--color-void)',
+            'lb-amber': 'var(--color-amber)',
+            'lb-surface': 'var(--color-surface)',
+            'lb-text': 'var(--color-text)',
+            'lb-white': 'var(--color-white)',
+            'lb-error': 'var(--color-error)',
+          },
+          fontFamily: {
+            'struct': ['Iosevka Aile', 'sans-serif'],
+            'code': ['Iosevka', 'monospace'],
+          }
+        }
+      },
+      corePlugins: {
+        borderRadius: false,
+        transitionProperty: false,
+        transitionDuration: false,
+        transitionTimingFunction: false,
+        transitionDelay: false,
+        animation: false,
+      }
+    }
+  </script>
+  <script>
+    // Performance Measurement Hooks
+    document.addEventListener('htmx:beforeRequest', (e) => {
+      const path = e.detail.requestConfig.path;
+      performance.mark(`start_${path}`);
+    });
+    
+    document.addEventListener('htmx:afterSettle', (e) => {
+      const path = e.detail.requestConfig.path;
+      performance.mark(`end_${path}`);
+      try {
+        performance.measure(`htmx_update_${path}`, `start_${path}`, `end_${path}`);
+        const entries = performance.getEntriesByName(`htmx_update_${path}`);
+        const lastEntry = entries[entries.length - 1];
+        console.log(`[PERF_MARK] ${path} updated in ${lastEntry.duration.toFixed(2)}ms`);
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+</head>
+<body class="bg-lb-void text-lb-text font-struct p-4 lg:p-8 h-screen overflow-hidden flex flex-col">
+
+  <!-- Header Técnico -->
+  <header class="border border-lb-surface bg-lb-void p-4 mb-6 flex justify-between items-center" x-data="{ time: new Date().toLocaleTimeString() }" x-init="setInterval(() => time = new Date().toLocaleTimeString(), 1000)">
+    <div>
+      <h1 class="font-code text-lb-amber text-xl uppercase tracking-widest">
+        Centro de Controle de Servidores e Logs de Infraestrutura
+      </h1>
+      <p class="text-xs mt-1">LOGICAL BRUTALISM DESIGN SYSTEM // DASHBOARD OPERACIONAL</p>
+    </div>
+    <div class="text-right flex flex-col items-end">
+      <div class="text-lb-white font-code uppercase tracking-widest text-sm flex items-center gap-2 mb-1">
+        <span class="w-2 h-2 bg-lb-text inline-block animate-pulse"></span> [STREAM_ACTIVE]
+      </div>
+      <div class="font-code text-xs text-lb-text">
+        LAST SYNC: <span x-text="time"></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex-1 flex flex-col lg:flex-row gap-6 overflow-hidden">
+    
+    <!-- Main Left Section (Grid + Logs) -->
+    <div class="flex-1 flex flex-col gap-6 overflow-hidden">
+      
+      <!-- Grade de Métricas (Grid 8 Cards) -->
+      <div class="flex-shrink-0">
+        <h2 class="font-code uppercase text-sm mb-3 border-b border-lb-surface pb-1 text-lb-white">Nós da Matriz // Status Global</h2>
+        <div id="servers-grid" 
+             class="grid grid-cols-2 lg:grid-cols-4 gap-4"
+             hx-get="/api/servers" 
+             hx-trigger="every 3s" 
+             hx-swap="innerHTML">
+          <!-- Initial Loading State -->
+          <div class="col-span-full text-center text-lb-surface p-8 border border-lb-surface font-code text-sm uppercase">
+            [AWAITING DATA INJECTION...]
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal de Logs em Tempo Real -->
+      <div class="flex-1 flex flex-col min-h-0 border border-lb-surface bg-lb-void">
+        <h2 class="font-code uppercase text-xs p-2 border-b border-lb-surface text-lb-amber bg-lb-surface/10">Log Stream // Terminal Output</h2>
+        <div id="log-terminal" 
+             class="flex-1 overflow-y-auto p-4 flex flex-col justify-end"
+             hx-get="/api/logs" 
+             hx-trigger="every 2s" 
+             hx-swap="innerHTML">
+          <div class="text-center text-lb-surface font-code text-sm uppercase">
+            [INITIALIZING SECURE CONNECTION...]
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Painel Lateral de Detalhes -->
+    <div class="w-full lg:w-1/3 flex-shrink-0 flex flex-col min-h-0">
+      <h2 class="font-code uppercase text-sm mb-3 border-b border-lb-surface pb-1 text-lb-white">Análise Histórica // 24H</h2>
+      <div id="detail-panel" class="flex-1 overflow-y-auto">
+        <div class="border border-lb-surface p-6 bg-lb-void h-full flex items-center justify-center text-center">
+          <p class="font-code text-lb-surface text-sm uppercase">Selecione um nó da matriz para carregar os dados densos do servidor.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Benchmark Analyzer -->
+  <div class="mt-6 border border-lb-surface bg-[#000] p-4 flex-shrink-0" x-data="benchmarkAnalyzer()">
+    <div class="flex justify-between items-center mb-4 border-b border-lb-surface pb-2">
+      <h2 class="font-code text-lb-amber uppercase text-sm">Benchmark Analyzer (Real-Time)</h2>
+      <button @click="exportJson()" class="bg-lb-surface hover:bg-lb-amber hover:text-lb-void text-lb-white font-code uppercase text-xs px-3 py-1 transition-colors border border-lb-surface">
+        EXPORT BENCHMARK
+      </button>
+    </div>
+    <div class="grid grid-cols-3 lg:grid-cols-6 gap-2 font-code text-[10px] overflow-y-auto max-h-32">
+      <template x-for="(value, key) in metrics" :key="key">
+        <div class="flex flex-col mb-2">
+          <span class="text-lb-surface uppercase opacity-70" x-text="key"></span>
+          <span class="text-lb-white font-bold text-xs" x-text="value"></span>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <script>
+    function benchmarkAnalyzer() {
+      return {
+        metrics: {
+          js_bundle_kb: 0, css_bundle_kb: 0, assets_kb: 0, total_transfer_kb: 0,
+          dom_nodes: 0, max_dom_depth: 0, interactive_elements: 0,
+          heap_used_mb: 0, heap_total_mb: 0, peak_heap_mb: 0,
+          request_count: 0, transferred_mb: 0, ws_messages: 0, ws_received_mb: 0,
+          dashboard_mount_ms: 0, widgets_render_ms: 0, charts_render_ms: 0,
+          widget_update_avg_ms: 0, widget_update_median_ms: 0, widget_update_p95_ms: 0, widget_update_max_ms: 0,
+          chart_update_avg_ms: 0, chart_update_median_ms: 0, chart_update_p95_ms: 0, chart_update_max_ms: 0,
+          direct_dependencies: 0, total_dependencies: 0, source_files: 0, lines_of_code: 0, component_count: 0
+        },
+        init() {
+          fetch('/api/code-metrics').then(r => r.json()).then(data => {
+            this.metrics.direct_dependencies = data.direct_dependencies;
+            this.metrics.total_dependencies = data.total_dependencies;
+            this.metrics.source_files = data.source_files;
+            this.metrics.lines_of_code = data.lines_of_code;
+            this.metrics.component_count = data.component_count;
+          }).catch(e => console.error(e));
+
+          setInterval(() => this.updateMetrics(), 1000);
+        },
+        getDomDepth(el) {
+          let depth = 0;
+          if (el.children) {
+            for (let i = 0; i < el.children.length; i++) {
+              depth = Math.max(depth, this.getDomDepth(el.children[i]));
+            }
+          }
+          return 1 + depth;
+        },
+        calcStats(measures) {
+          if(!measures || measures.length === 0) return {avg: 0, median: 0, p95: 0, max: 0};
+          const durations = measures.map(m => m.duration).sort((a,b)=>a-b);
+          const avg = durations.reduce((a,b)=>a+b, 0) / durations.length;
+          const median = durations[Math.floor(durations.length/2)];
+          const p95 = durations[Math.floor(durations.length * 0.95)];
+          const max = durations[durations.length - 1];
+          return {avg, median, p95, max};
+        },
+        updateMetrics() {
+          const p = window.performance;
+          const entries = p.getEntriesByType('resource');
+          
+          let js_bytes = 0, css_bytes = 0, total_bytes = 0;
+          entries.forEach(e => {
+            const size = e.transferSize || e.decodedBodySize || 0;
+            total_bytes += size;
+            if (e.name.endsWith('.js')) js_bytes += size;
+            if (e.name.endsWith('.css')) css_bytes += size;
+          });
+
+          const memory = p.memory || {};
+          let heap_used_mb = (memory.usedJSHeapSize || 0) / (1024 * 1024);
+          let heap_total_mb = (memory.totalJSHeapSize || 0) / (1024 * 1024);
+          window.__peak_heap = Math.max(window.__peak_heap || 0, heap_used_mb);
+
+          const widgetMeasures = p.getEntriesByType('measure').filter(m => m.name.includes('htmx_update_/api/servers') || m.name.includes('htmx_update_/api/logs'));
+          const chartMeasures = p.getEntriesByType('measure').filter(m => m.name.includes('htmx_update_/api/details'));
+
+          const widgetStats = this.calcStats(widgetMeasures);
+          const chartStats = this.calcStats(chartMeasures);
+
+          const nav = p.getEntriesByType('navigation')[0];
+          const dashboard_mount_ms = nav ? nav.domContentLoadedEventEnd - nav.startTime : 0;
+
+          this.metrics.js_bundle_kb = Number((js_bytes / 1024).toFixed(2));
+          this.metrics.css_bundle_kb = Number((css_bytes / 1024).toFixed(2));
+          this.metrics.assets_kb = Number(((total_bytes - js_bytes - css_bytes) / 1024).toFixed(2));
+          this.metrics.total_transfer_kb = Number((total_bytes / 1024).toFixed(2));
+          this.metrics.dom_nodes = document.getElementsByTagName('*').length;
+          this.metrics.max_dom_depth = this.getDomDepth(document.body);
+          this.metrics.interactive_elements = document.querySelectorAll('button, a, input, [hx-get], [hx-post], [hx-put], [hx-delete], [hx-patch]').length;
+          this.metrics.heap_used_mb = Number(heap_used_mb.toFixed(2));
+          this.metrics.heap_total_mb = Number(heap_total_mb.toFixed(2));
+          this.metrics.peak_heap_mb = Number((window.__peak_heap || 0).toFixed(2));
+          this.metrics.request_count = entries.length;
+          this.metrics.transferred_mb = Number((total_bytes / (1024 * 1024)).toFixed(2));
+          
+          this.metrics.dashboard_mount_ms = Number(dashboard_mount_ms.toFixed(2));
+          this.metrics.widgets_render_ms = Number((widgetMeasures.length > 0 ? widgetMeasures[0].duration : 0).toFixed(2));
+          this.metrics.charts_render_ms = Number((chartMeasures.length > 0 ? chartMeasures[0].duration : 0).toFixed(2));
+          
+          this.metrics.widget_update_avg_ms = Number(widgetStats.avg.toFixed(2));
+          this.metrics.widget_update_median_ms = Number(widgetStats.median.toFixed(2));
+          this.metrics.widget_update_p95_ms = Number(widgetStats.p95.toFixed(2));
+          this.metrics.widget_update_max_ms = Number(widgetStats.max.toFixed(2));
+          
+          this.metrics.chart_update_avg_ms = Number(chartStats.avg.toFixed(2));
+          this.metrics.chart_update_median_ms = Number(chartStats.median.toFixed(2));
+          this.metrics.chart_update_p95_ms = Number(chartStats.p95.toFixed(2));
+          this.metrics.chart_update_max_ms = Number(chartStats.max.toFixed(2));
+        },
+        exportJson() {
+          const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.metrics, null, 2));
+          const downloadAnchorNode = document.createElement('a');
+          downloadAnchorNode.setAttribute("href", dataStr);
+          downloadAnchorNode.setAttribute("download", "LogicalBrutalism-benchmark.json");
+          document.body.appendChild(downloadAnchorNode);
+          downloadAnchorNode.click();
+          downloadAnchorNode.remove();
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

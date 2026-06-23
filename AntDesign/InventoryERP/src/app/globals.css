@@ -1,0 +1,39 @@
+@import 'antd/dist/reset.css';
+
+:root {
+  --background-color: #f0f2f5;
+  --text-color: #141414;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Maximize density for industrial desktop environments */
+.dense-table .ant-table-cell {
+  padding: 4px 8px !important;
+  font-size: 13px !important;
+}
+
+.dense-card .ant-card-body {
+  padding: 12px;
+}
+
+.ticker-item {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,177 @@
+<div id="benchmark-analyzer" 
+     x-data="benchmarkAnalyzer()" 
+     class="fixed bottom-4 right-4 bg-lb-void border border-lb-amber p-2 w-72 z-50 shadow-lg text-[0.6rem] font-code text-lb-surface overflow-hidden">
+  
+  <div class="flex justify-between items-center border-b border-lb-surface pb-1 mb-2">
+    <span class="text-lb-amber uppercase font-bold tracking-widest">[SYS_BENCH]</span>
+    <button @click="exportBenchmark()" class="bg-lb-surface text-lb-void px-1 hover:bg-lb-amber uppercase text-[0.55rem]">
+      Export Benchmark
+    </button>
+  </div>
+
+  <div class="grid grid-cols-2 gap-x-2 gap-y-1">
+    <!-- Network & Asset Metrics -->
+    <div class="flex justify-between"><span>JS Bundle:</span><span x-text="metrics.js_bundle_kb + 'kb'" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>CSS Bundle:</span><span x-text="metrics.css_bundle_kb + 'kb'" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Assets:</span><span x-text="metrics.assets_kb + 'kb'" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Transfer:</span><span x-text="metrics.total_transfer_kb + 'kb'" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Req Count:</span><span x-text="metrics.request_count" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Transfer MB:</span><span x-text="metrics.transferred_mb" class="text-lb-text"></span></div>
+    
+    <!-- DOM Metrics -->
+    <div class="flex justify-between"><span>DOM Nodes:</span><span x-text="metrics.dom_nodes" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Max Depth:</span><span x-text="metrics.max_dom_depth" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Interactive:</span><span x-text="metrics.interactive_elements" class="text-lb-text"></span></div>
+    
+    <!-- Memory -->
+    <div class="flex justify-between"><span>Heap Use:</span><span x-text="metrics.heap_used_mb + 'MB'" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Heap Tot:</span><span x-text="metrics.heap_total_mb + 'MB'" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Peak Heap:</span><span x-text="metrics.peak_heap_mb + 'MB'" class="text-lb-text"></span></div>
+    
+    <!-- WebSockets (placeholder per JSON req) -->
+    <div class="flex justify-between"><span>WS Msgs:</span><span x-text="metrics.ws_messages" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>WS Recv:</span><span x-text="metrics.ws_received_mb + 'MB'" class="text-lb-text"></span></div>
+
+    <!-- Update Times (Widgets/Rows) -->
+    <div class="flex justify-between text-lb-amber"><span>W-Avg:</span><span x-text="metrics.widget_update_avg_ms + 'ms'"></span></div>
+    <div class="flex justify-between text-lb-amber"><span>W-Med:</span><span x-text="metrics.widget_update_median_ms + 'ms'"></span></div>
+    <div class="flex justify-between text-lb-amber"><span>W-P95:</span><span x-text="metrics.widget_update_p95_ms + 'ms'"></span></div>
+    <div class="flex justify-between text-lb-amber"><span>W-Max:</span><span x-text="metrics.widget_update_max_ms + 'ms'"></span></div>
+    
+    <!-- Update Times (Charts) -->
+    <div class="flex justify-between text-lb-amber"><span>C-Avg:</span><span x-text="metrics.chart_update_avg_ms + 'ms'"></span></div>
+    <div class="flex justify-between text-lb-amber"><span>C-Med:</span><span x-text="metrics.chart_update_median_ms + 'ms'"></span></div>
+    <div class="flex justify-between text-lb-amber"><span>C-P95:</span><span x-text="metrics.chart_update_p95_ms + 'ms'"></span></div>
+    <div class="flex justify-between text-lb-amber"><span>C-Max:</span><span x-text="metrics.chart_update_max_ms + 'ms'"></span></div>
+    
+    <!-- Code Metrics -->
+    <div class="flex justify-between"><span>Src Files:</span><span x-text="metrics.source_files" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>LOC:</span><span x-text="metrics.lines_of_code" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Direct Deps:</span><span x-text="metrics.direct_dependencies" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Total Deps:</span><span x-text="metrics.total_dependencies" class="text-lb-text"></span></div>
+    <div class="flex justify-between"><span>Components:</span><span x-text="metrics.component_count" class="text-lb-text"></span></div>
+  </div>
+</div>
+
+<script>
+function benchmarkAnalyzer() {
+  return {
+    metrics: {
+      js_bundle_kb: 0, css_bundle_kb: 0, assets_kb: 0, total_transfer_kb: 0,
+      dom_nodes: 0, max_dom_depth: 0, interactive_elements: 0,
+      heap_used_mb: 0, heap_total_mb: 0, peak_heap_mb: 0,
+      request_count: 0, transferred_mb: 0,
+      ws_messages: 0, ws_received_mb: 0,
+      dashboard_mount_ms: 0, widgets_render_ms: 0, charts_render_ms: 0,
+      widget_update_avg_ms: 0, widget_update_median_ms: 0, widget_update_p95_ms: 0, widget_update_max_ms: 0,
+      chart_update_avg_ms: 0, chart_update_median_ms: 0, chart_update_p95_ms: 0, chart_update_max_ms: 0,
+      direct_dependencies: 0, total_dependencies: 0, source_files: 0, lines_of_code: 0, component_count: 0
+    },
+    widgetTimes: [],
+    chartTimes: [],
+    init() {
+      // Fetch backend metrics
+      fetch('/api/benchmark-metrics')
+        .then(res => res.json())
+        .then(data => {
+          this.metrics.direct_dependencies = data.direct_dependencies;
+          this.metrics.total_dependencies = data.total_dependencies;
+          this.metrics.source_files = data.source_files;
+          this.metrics.lines_of_code = data.lines_of_code;
+          this.metrics.component_count = data.component_count;
+        });
+
+      // Track mount time
+      const navEntries = performance.getEntriesByType('navigation');
+      if (navEntries.length > 0) {
+        this.metrics.dashboard_mount_ms = parseFloat(navEntries[0].duration.toFixed(2));
+      }
+
+      // Hook HTMX for update times
+      document.addEventListener('htmx:afterSwap', (e) => {
+        const targetId = e.detail.target.id;
+        const measureName = 'htmx-swap-duration-' + targetId;
+        const measures = performance.getEntriesByName(measureName);
+        if (measures.length > 0) {
+          const duration = measures[measures.length - 1].duration;
+          
+          if (targetId.startsWith('row-')) {
+            this.widgetTimes.push(duration);
+            if (this.widgetTimes.length > 50) this.widgetTimes.shift();
+            this.updateStats('widget', this.widgetTimes);
+          } else if (targetId === 'turnover-chart') {
+            this.chartTimes.push(duration);
+            if (this.chartTimes.length > 50) this.chartTimes.shift();
+            this.updateStats('chart', this.chartTimes);
+          }
+        }
+      });
+
+      // Polling loop
+      setInterval(() => this.captureMetrics(), 1000);
+      this.captureMetrics();
+    },
+    updateStats(prefix, arr) {
+      if (arr.length === 0) return;
+      const sorted = [...arr].sort((a,b) => a-b);
+      const sum = sorted.reduce((a,b) => a+b, 0);
+      this.metrics[`${prefix}_update_avg_ms`] = parseFloat((sum / sorted.length).toFixed(2));
+      this.metrics[`${prefix}_update_median_ms`] = parseFloat(sorted[Math.floor(sorted.length/2)].toFixed(2));
+      this.metrics[`${prefix}_update_p95_ms`] = parseFloat(sorted[Math.floor(sorted.length * 0.95) || 0].toFixed(2));
+      this.metrics[`${prefix}_update_max_ms`] = parseFloat(sorted[sorted.length-1].toFixed(2));
+    },
+    getDomDepth(el, currentDepth = 0) {
+      if (!el.children || el.children.length === 0) return currentDepth;
+      let maxDepth = currentDepth;
+      for (let i = 0; i < el.children.length; i++) {
+        const d = this.getDomDepth(el.children[i], currentDepth + 1);
+        if (d > maxDepth) maxDepth = d;
+      }
+      return maxDepth;
+    },
+    captureMetrics() {
+      // Network
+      const resources = performance.getEntriesByType('resource');
+      let jsBytes = 0, cssBytes = 0, otherBytes = 0, reqs = resources.length;
+      resources.forEach(r => {
+        if (r.initiatorType === 'script' || r.name.endsWith('.js')) jsBytes += r.transferSize || 0;
+        else if (r.initiatorType === 'link' || r.name.endsWith('.css')) cssBytes += r.transferSize || 0;
+        else otherBytes += r.transferSize || 0;
+      });
+      const totalBytes = jsBytes + cssBytes + otherBytes;
+
+      this.metrics.js_bundle_kb = parseFloat((jsBytes / 1024).toFixed(2));
+      this.metrics.css_bundle_kb = parseFloat((cssBytes / 1024).toFixed(2));
+      this.metrics.assets_kb = parseFloat((otherBytes / 1024).toFixed(2));
+      this.metrics.total_transfer_kb = parseFloat((totalBytes / 1024).toFixed(2));
+      this.metrics.transferred_mb = parseFloat((totalBytes / (1024 * 1024)).toFixed(4));
+      this.metrics.request_count = reqs;
+
+      // DOM
+      this.metrics.dom_nodes = document.getElementsByTagName('*').length;
+      this.metrics.max_dom_depth = this.getDomDepth(document.body);
+      this.metrics.interactive_elements = document.querySelectorAll('a, button, input, select, textarea').length;
+
+      // Memory
+      if (performance.memory) {
+        const used = performance.memory.usedJSHeapSize / (1024 * 1024);
+        const total = performance.memory.totalJSHeapSize / (1024 * 1024);
+        this.metrics.heap_used_mb = parseFloat(used.toFixed(2));
+        this.metrics.heap_total_mb = parseFloat(total.toFixed(2));
+        if (this.metrics.heap_used_mb > this.metrics.peak_heap_mb) {
+          this.metrics.peak_heap_mb = this.metrics.heap_used_mb;
+        }
+      }
+    },
+    exportBenchmark() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.metrics, null, 2));
+      const downloadAnchorNode = document.createElement('a');
+      downloadAnchorNode.setAttribute("href",     dataStr);
+      downloadAnchorNode.setAttribute("download", "LogicalBrutalism-benchmark.json");
+      document.body.appendChild(downloadAnchorNode);
+      downloadAnchorNode.click();
+      downloadAnchorNode.remove();
+    }
+  };
+}
+</script>
