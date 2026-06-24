@@ -1,0 +1,328 @@
+{% extends "base.html" %}
+
+{% block title %}Logical Benchs :: Empirical Performance Matrix{% endblock %}
+{% block nav_index %}active{% endblock %}
+
+{% block content %}
+
+<!-- HERO HEADER -->
+<header class="border border-lb-surface" style="padding:var(--space-5) var(--space-4);margin-bottom:var(--space-5);">
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+    <div>
+      <p class="font-code text-lb-amber text-xs uppercase tracking-widest mb-2" style="letter-spacing:0.2em;">
+        [ EMPIRICAL PERFORMANCE MATRIX ]
+      </p>
+      <h1 class="font-code text-lb-white text-2xl sm:text-3xl uppercase tracking-wider" style="line-height:1.2;">
+        Logical Benchs<br>
+        <span class="text-lb-text text-lg sm:text-xl">vs. Virtual DOM SPAs</span>
+      </h1>
+      <p class="font-struct text-lb-text text-sm mt-4" style="max-width:620px;line-height:1.7;">
+        High-frequency WebSocket stress tests comparing the Logical Brutalism stack
+        <span class="text-lb-white">(Python/FastAPI + HTMX + Alpine.js)</span> against
+        React-based design systems <span class="text-lb-white">(MUI, Ant Design, Chakra UI, Mantine)</span>.
+        Each benchmark renders identical data grids under identical network conditions.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://github.com/matheuslacerda-dev/logical-brutalism" target="_blank" rel="noopener"
+           class="btn" style="font-size:0.7rem;min-height:32px;padding:var(--space-1) var(--space-3);gap:var(--space-1);display:inline-flex;align-items:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+          STAR THE DESIGN SYSTEM
+        </a>
+        <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener"
+           class="btn btn-outline" style="font-size:0.7rem;min-height:32px;padding:var(--space-1) var(--space-3);gap:var(--space-1);display:inline-flex;align-items:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+          STAR THE BENCHMARKS
+        </a>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2 sm:items-end shrink-0">
+      <div class="font-code text-xs text-lb-text uppercase tracking-wider border border-lb-surface" style="padding:var(--space-2) var(--space-3);">
+        <span class="text-lb-amber">5</span> Frameworks
+      </div>
+      <div class="font-code text-xs text-lb-text uppercase tracking-wider border border-lb-surface" style="padding:var(--space-2) var(--space-3);">
+        <span class="text-lb-amber">4</span> Test Suites
+      </div>
+      <div class="font-code text-xs text-lb-text uppercase tracking-wider border border-lb-surface" style="padding:var(--space-2) var(--space-3);">
+        <span class="text-lb-amber">20</span> Total Benchmarks
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════
+     STATIC EMPIRICAL RESULTS
+     ═══════════════════════════════════════════════════ -->
+<section style="margin-bottom:var(--space-6);">
+  <div class="flex items-center gap-3" style="margin-bottom:var(--space-3);">
+    <span class="text-lb-amber">▣</span>
+    <h2 class="lb-section-title" style="margin-bottom:0;">Empirical Results</h2>
+  </div>
+  <p class="font-struct text-lb-text text-sm" style="max-width:720px;line-height:1.7;margin-bottom:var(--space-4);">
+    Real-world measurements under high-density B2B stress.
+    Virtual DOM overhead results in significant latency spikes and memory bloat compared to Server-Driven UI.
+  </p>
+
+  <!-- CHART 1 :: P95 Latency (ms) — Horizontal Bar -->
+  <div class="border border-lb-surface" style="background:var(--color-surface);padding:var(--space-4);margin-bottom:var(--space-6);">
+    <h3 class="font-code text-lb-white text-xs uppercase tracking-widest" style="margin-bottom:var(--space-4);">
+      [ P95 Latency (ms) — Lower is Better ]
+    </h3>
+
+    <div class="flex flex-col" style="gap:var(--space-3);">
+      <!-- Logical Brutalism -->
+      <div>
+        <div class="flex justify-between font-code text-xs uppercase" style="margin-bottom:var(--space-1);">
+          <span class="text-lb-amber font-bold">Logical Brutalism (Avg)</span>
+          <span class="text-lb-amber font-bold">760 ms</span>
+        </div>
+        <div class="w-full h-3 relative border border-lb-surface" style="background:var(--color-void);">
+          <div class="absolute top-0 left-0 h-full" style="width:100%;background:var(--color-amber);"></div>
+        </div>
+      </div>
+      <!-- Mantine -->
+      <div>
+        <div class="flex justify-between font-code text-xs uppercase" style="margin-bottom:var(--space-1);">
+          <span class="text-lb-white">Mantine (Avg)</span>
+          <span class="text-lb-text">510 ms</span>
+        </div>
+        <div class="w-full h-3 relative border border-lb-surface" style="background:var(--color-void);">
+          <div class="absolute top-0 left-0 h-full" style="width:67.1%;background:var(--color-text);opacity:0.5;"></div>
+        </div>
+      </div>
+      <!-- Chakra UI -->
+      <div>
+        <div class="flex justify-between font-code text-xs uppercase" style="margin-bottom:var(--space-1);">
+          <span class="text-lb-white">Chakra UI (Avg)</span>
+          <span class="text-lb-text">331 ms</span>
+        </div>
+        <div class="w-full h-3 relative border border-lb-surface" style="background:var(--color-void);">
+          <div class="absolute top-0 left-0 h-full" style="width:43.5%;background:var(--color-text);opacity:0.5;"></div>
+        </div>
+      </div>
+      <!-- Ant Design -->
+      <div>
+        <div class="flex justify-between font-code text-xs uppercase" style="margin-bottom:var(--space-1);">
+          <span class="text-lb-white">Ant Design (Avg)</span>
+          <span class="text-lb-text">284 ms</span>
+        </div>
+        <div class="w-full h-3 relative border border-lb-surface" style="background:var(--color-void);">
+          <div class="absolute top-0 left-0 h-full" style="width:37.3%;background:var(--color-text);opacity:0.5;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTNOTE -->
+    <div class="font-code text-[10px] text-lb-text uppercase tracking-widest" style="margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px dashed var(--color-surface);">
+      <span class="text-lb-amber">*</span> Material Design was excluded from this chart due to catastrophic latency crashes (> 31,000 ms).
+    </div>
+  </div>
+
+  <!-- CHART 2 :: Resource Allocation Matrix (Table) -->
+  <div class="border border-lb-surface overflow-x-auto" style="background:var(--color-surface);padding:var(--space-4);">
+    <h3 class="font-code text-lb-white text-xs uppercase tracking-widest" style="margin-bottom:var(--space-4);">
+      [ Resource Allocation Matrix ]
+    </h3>
+    <table class="w-full text-left border-collapse font-code" style="min-width:800px;border:2px solid var(--color-surface);">
+      <thead class="bg-lb-surface border-b-2 border-lb-white">
+        <tr>
+          <th class="text-xs uppercase text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);">Framework</th>
+          <th class="text-xs uppercase text-lb-white font-bold text-right" style="padding:var(--space-3) var(--space-2);">JS Bundle (Avg)</th>
+          <th class="text-xs uppercase text-lb-white font-bold text-right" style="padding:var(--space-3) var(--space-2);">DOM Nodes (Avg)</th>
+          <th class="text-xs uppercase text-lb-white font-bold text-right" style="padding:var(--space-3) var(--space-2);">P95 Latency (Avg)</th>
+        </tr>
+      </thead>
+      <tbody class="text-sm">
+        <!-- Logical Brutalism -->
+        <tr class="group hover:bg-lb-surface transition-none" style="cursor:crosshair;">
+          <td class="text-lb-amber font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-left:2px solid transparent;group-hover:border-lb-amber;">
+            <span class="inline-block w-2 h-2 bg-lb-amber mr-2 animate-pulse"></span>Logical Brutalism
+          </td>
+          <td class="text-right text-lb-amber" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 font-bold px-1">[ 7.1 KB ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-amber opacity-40 mix-blend-screen" style="width:0.2%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-amber" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 font-bold px-1">[ 371 ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-amber opacity-40 mix-blend-screen" style="width:49.6%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-amber font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-right:2px solid transparent;">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 font-bold px-1">[ 760 ms ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-amber opacity-40 mix-blend-screen" style="width:100%;"></div>
+            </div>
+          </td>
+        </tr>
+        <!-- Mantine -->
+        <tr class="group hover:bg-lb-surface transition-none" style="cursor:crosshair;">
+          <td class="text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-left:2px solid transparent;">Mantine<span class="text-lb-amber ml-1">▸</span></td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 1193.1 KB ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:35.5%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 720 ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:96.2%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-right:2px solid transparent;">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 510 ms ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:67.1%;"></div>
+            </div>
+          </td>
+        </tr>
+        <!-- Ant Design -->
+        <tr class="group hover:bg-lb-surface transition-none" style="cursor:crosshair;">
+          <td class="text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-left:2px solid transparent;">Ant Design<span class="text-lb-amber ml-1">*</span></td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 1698.8 KB ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:50.6%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 572 ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:76.4%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-right:2px solid transparent;">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 284 ms ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:37.3%;"></div>
+            </div>
+          </td>
+        </tr>
+        <!-- Chakra UI -->
+        <tr class="group hover:bg-lb-surface transition-none" style="cursor:crosshair;">
+          <td class="text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-left:2px solid transparent;">Chakra UI</td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 1903.5 KB ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:56.7%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 496 ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:66.3%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);border-bottom:1px solid var(--color-surface);border-right:2px solid transparent;">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 331 ms ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:43.5%;"></div>
+            </div>
+          </td>
+        </tr>
+        <!-- Material Design -->
+        <tr class="group hover:bg-lb-surface transition-none" style="cursor:crosshair;">
+          <td class="text-lb-white font-bold" style="padding:var(--space-3) var(--space-2);border-left:2px solid transparent;">Material Design</td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 3356.2 KB ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:100%;"></div>
+            </div>
+          </td>
+          <td class="text-right text-lb-white" style="padding:var(--space-3) var(--space-2);">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">[ 748 ]</span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-text opacity-20 mix-blend-screen" style="width:100%;"></div>
+            </div>
+          </td>
+          <td class="text-right font-bold text-lb-error" style="padding:var(--space-3) var(--space-2);border-right:2px solid transparent;">
+            <div class="relative inline-block w-full text-right" style="background: repeating-linear-gradient(90deg, var(--color-surface), var(--color-surface) 2px, transparent 2px, transparent 4px);">
+              <span class="relative z-10 px-1 font-bold">
+                <span class="bg-lb-error text-lb-void px-1 mr-1 text-[10px]">TIMEOUT</span>[ 31364 ms ]
+              </span>
+              <div class="absolute bottom-0 right-0 h-full bg-lb-error opacity-20 mix-blend-screen" style="width:100%;"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- FOOTNOTES -->
+    <div class="font-code text-xs text-lb-text" style="margin-top:var(--space-3);padding-top:var(--space-2);border-top:1px solid var(--color-surface);">
+      <span class="text-lb-amber">*</span> Ant Design rendered no functional output — WebSocket bridge failed to initialize.<br>
+      <span class="text-lb-amber">▸</span> Mantine WS count (4108) indicates uncontrolled reconnection loop.
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     BENCHMARK GRID :: grouped by test suite
+     ═══════════════════════════════════════════════════ -->
+{% set suites = [
+  {"name": "Order Book", "folder": "order-book", "desc": "Real-time order book with high-frequency bid/ask updates via WebSocket.", "icon": "⚡"},
+  {"name": "Server Control Center", "folder": "server-control-center", "desc": "Server control dashboard with live metrics, logs, and status polling.", "icon": "◉"},
+  {"name": "Financial Dashboard", "folder": "financial-dashboard", "desc": "Financial dashboard with streaming market data and chart rendering.", "icon": "▤"},
+  {"name": "Inventory ERP", "folder": "inventory-erp", "desc": "Enterprise inventory management with bulk CRUD and data grid stress.", "icon": "▦"}
+] %}
+
+{% set frameworks = [
+  {"label": "Logical Brutalism", "key": "LogicalBrutalism", "highlight": true},
+  {"label": "Material Design", "key": "MaterialDesign", "highlight": false},
+  {"label": "Ant Design", "key": "AntDesign", "highlight": false},
+  {"label": "Chakra UI", "key": "Chakra", "highlight": false},
+  {"label": "Mantine", "key": "Mantine", "highlight": false}
+] %}
+
+{% for suite in suites %}
+<section style="margin-bottom:var(--space-5);">
+  <div class="flex items-center gap-3" style="margin-bottom:var(--space-2);">
+    <span class="text-lb-amber">{{ suite.icon }}</span>
+    <h2 class="lb-section-title" style="margin-bottom:0;">{{ suite.name }}</h2>
+  </div>
+  <p class="font-struct text-lb-text text-xs" style="padding-left:1.5rem;line-height:1.6;margin-bottom:var(--space-3);">{{ suite.desc }}</p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style="border:1px solid var(--color-surface);">
+    {% for fw in frameworks %}
+    {% set href = "/logical-benchs/" ~ fw.key ~ "/" ~ suite.folder %}
+    <a href="{{ href }}"
+       class="group block transition-none border {% if fw.highlight %}border-lb-amber hover:bg-lb-amber{% else %}border-lb-surface hover:border-lb-white hover:bg-lb-white{% endif %}"
+       style="padding:var(--space-3) var(--space-4);text-decoration:none;cursor:crosshair;">
+      <span class="font-code text-xs uppercase tracking-widest block {% if fw.highlight %}text-lb-amber font-bold{% else %}text-lb-text{% endif %} group-hover:text-lb-void" style="margin-bottom:var(--space-2);">
+        {{ fw.label }}
+      </span>
+      <span class="font-code text-xs uppercase block group-hover:text-lb-void font-bold {% if fw.highlight %}text-lb-amber{% else %}text-lb-white{% endif %}" style="letter-spacing:0.12em;">
+        [ LAUNCH ]
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<!-- BOTTOM CTA -->
+<section class="border border-lb-amber flex flex-col sm:flex-row items-center justify-between gap-4"
+         style="padding:var(--space-4);margin-top:var(--space-5);margin-bottom:var(--space-4);">
+  <div>
+    <p class="font-code text-lb-amber text-sm uppercase tracking-wider" style="margin-bottom:var(--space-1);">Open Source</p>
+    <p class="font-struct text-lb-text text-xs" style="line-height:1.6;">
+      All benchmark source code, WebSocket servers, and measurement scripts are publicly available.
+      The design system itself is documented in the official repository.
+    </p>
+  </div>
+  <div class="flex flex-col gap-2 shrink-0">
+    <a href="https://github.com/matheuslacerda-dev/logical-brutalism" target="_blank" rel="noopener"
+       class="btn" style="font-size:0.75rem;min-height:36px;padding:var(--space-1) var(--space-3);gap:var(--space-2);display:inline-flex;align-items:center;white-space:nowrap;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+      STAR THE DESIGN SYSTEM
+    </a>
+    <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener"
+       class="btn btn-outline" style="font-size:0.75rem;min-height:36px;padding:var(--space-1) var(--space-3);gap:var(--space-2);display:inline-flex;align-items:center;white-space:nowrap;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+      STAR THE BENCHMARKS
+    </a>
+  </div>
+</section>
+
+{% endblock %}

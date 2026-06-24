@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =============================================
+       [SYS_META] LOGICAL BENCHS ROOT
+       =============================================
+       [SEO] TITANESCO HEAD — LOGICAL BENCHS
+       ============================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+
+  <!-- [1] TITLE & ICON -->
+  <title>{% block title %}Logical Benchs :: Empirical Performance Matrix{% endblock %}</title>
+  <link rel="icon" type="image/svg+xml" href="/logical-benchs/static/Logical-Brutalism-Logo.svg">
+
+  <!-- [2] CRAWLERS & INDEXING -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="{% block canonical %}https://matheuslacerda.dev/logical-benchs{% endblock %}">
+
+  <!-- [3] DESCRIPTION & KEYWORDS -->
+  <meta name="title" content="Logical Benchs :: Empirical Performance Matrix">
+  <meta name="description" content="{% block meta_description %}Empirical benchmarks comparing the Logical Brutalism stack (Python/FastAPI + HTMX + Alpine.js) against Virtual DOM SPAs under high-density B2B stress.{% endblock %}">
+  <meta name="keywords" content="Logical Benchs, Benchmarks, HTMX, FastAPI, React, Alpine.js, Server-Driven UI, Performance, p95 Latency, Memory Allocation, Python, Matheus Lacerda, Logical Brutalism">
+
+  <!-- [4] AUTHORSHIP & IDENTITY -->
+  <meta name="author" content="Matheus Lacerda Ferreira">
+  <meta name="creator" content="Matheus Lacerda Ferreira">
+  <meta name="publisher" content="Matheus Lacerda Ferreira">
+
+  <!-- [5] OPEN GRAPH — Facebook, LinkedIn, Discord, WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Logical Benchs | Matheus Lacerda">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="{% block og_url %}https://matheuslacerda.dev/logical-benchs{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}Logical Benchs :: Empirical Performance Matrix{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Raw data. No bloat. See why Server-Driven UI outperforms modern SPAs in memory allocation and p95 latency.{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}https://matheuslacerda.dev/static/Logical-Brutalism-Logo.svg{% endblock %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logical Benchs — Empirical Performance Matrix">
+
+  <!-- [6] TWITTER / X CARDS -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@matheuslacerdev">
+  <meta name="twitter:creator" content="@matheuslacerdev">
+  <meta property="twitter:url" content="{% block twitter_url %}https://matheuslacerda.dev/logical-benchs{% endblock %}">
+  <meta property="twitter:title" content="{% block twitter_title %}Logical Benchs :: The Post-React Architecture{% endblock %}">
+  <meta property="twitter:description" content="{% block twitter_description %}Empirical benchmarks proving HTMX + FastAPI scales better than React under high-frequency WebSocket stress.{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}https://matheuslacerda.dev/static/Logical-Brutalism-Logo.svg{% endblock %}">
+  <meta name="twitter:image:alt" content="Logical Benchs — Performance Benchmark Portal">
+
+  <!-- [7] PROFILE METADATA -->
+  <meta property="profile:first_name" content="Matheus">
+  <meta property="profile:last_name" content="Lacerda">
+  <meta property="profile:username" content="matheuslacerda-dev">
+
+  <!-- [8] ECOSYSTEM CROSS-LINKING -->
+  <link rel="author" href="https://matheuslacerda.dev">
+  <link rel="me" href="https://github.com/matheuslacerda-dev">
+  <link rel="me" href="https://linkedin.com/in/matheus-lacerda-ferreira/">
+  <link rel="me" href="https://x.com/matheuslacerdev">
+  <link rel="me" href="https://bsky.app/profile/matheuslacerda.dev">
+  <link rel="me" href="https://logicalbrutalism.substack.com/">
+  <link rel="me" href="https://medium.com/@matheuslacerda-dev">
+
+  <!-- [9] JSON-LD STRUCTURED DATA -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://matheuslacerda.dev/#person",
+          "name": "Matheus Lacerda Ferreira",
+          "url": "https://matheuslacerda.dev/",
+          "image": "https://matheuslacerda.dev/static/img/profile.avif",
+          "jobTitle": "Backend Software Engineer",
+          "description": "Backend Software Engineer specializing in Python ecosystems, FastAPI, and minimalist high-performance architectures.",
+          "alumniOf": { "@type": "CollegeOrUniversity", "name": "Fatec" },
+          "knowsAbout": [
+            "Python", "FastAPI", "Django", "HTMX", "Alpine.js",
+            "Tailwind CSS", "Software Architecture", "Logical Brutalism",
+            "Server-Driven UI", "Web Performance", "REST APIs"
+          ],
+          "sameAs": [
+            "https://github.com/matheuslacerda-dev",
+            "https://linkedin.com/in/matheus-lacerda-ferreira/",
+            "https://x.com/matheuslacerdev",
+            "https://bsky.app/profile/matheuslacerda.dev",
+            "https://logicalbrutalism.substack.com/",
+            "https://medium.com/@matheuslacerda-dev"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://matheuslacerda.dev/#website",
+          "url": "https://matheuslacerda.dev/",
+          "name": "Matheus Lacerda | ML_OS v2.0",
+          "description": "Portfolio and technical hub of Matheus Lacerda Ferreira, Backend Software Engineer.",
+          "inLanguage": "en-US",
+          "publisher": { "@id": "https://matheuslacerda.dev/#person" }
+        },
+        {
+          "@type": "Dataset",
+          "@id": "https://matheuslacerda.dev/logical-benchs/#dataset",
+          "name": "Logical Benchs — Empirical Performance Matrix",
+          "description": "Empirical benchmarks comparing the Logical Brutalism stack against Virtual DOM SPAs under high-density B2B stress.",
+          "url": "https://matheuslacerda.dev/logical-benchs",
+          "creator": { "@id": "https://matheuslacerda.dev/#person" },
+          "keywords": ["benchmarks", "HTMX", "FastAPI", "React", "performance", "p95 latency"]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://matheuslacerda.dev/" },
+            { "@type": "ListItem", "position": 2, "name": "Logical Benchs", "item": "https://matheuslacerda.dev/logical-benchs" }
+          ]
+        }
+      ]
+    }
+  </script>
+
+  <!-- Absolute Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Iosevka+Aile:wght@400;500;600;700&family=Iosevka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Parasitic Dependencies (HTMX/Alpine) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+  <!-- Central Visual Matrix -->
+  <link rel="stylesheet" href="/logical-benchs/static/css/logical-brutalism.css">
+
+  <!-- Tailwind Hook with Brutalist Plugin -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/logical-benchs/static/js/logical-brutalism-tailwind.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'lb-void': 'var(--color-void)',
+            'lb-amber': 'var(--color-amber)',
+            'lb-surface': 'var(--color-surface)',
+            'lb-text': 'var(--color-text)',
+            'lb-white': 'var(--color-white)',
+            'lb-error': 'var(--color-error)',
+          },
+          fontFamily: {
+            'struct': ['Iosevka Aile', 'sans-serif'],
+            'code': ['Iosevka', 'monospace'],
+          }
+        }
+      },
+      corePlugins: {
+        borderRadius: false,
+        transitionProperty: false,
+        transitionDuration: false,
+        transitionTimingFunction: false,
+        transitionDelay: false,
+        animation: false,
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    .lb-section-title {
+      @apply font-code text-lb-white text-sm uppercase tracking-widest mb-4;
+    }
+    .lb-section-title::before {
+      content: ":: ";
+      color: var(--color-amber);
+    }
+  </style>
+</head>
+<body class="bg-lb-void text-lb-text font-struct min-h-screen flex flex-col">
+
+  <!-- NAV -->
+  <nav class="lb-nav" style="position:sticky;top:0;z-index:50;">
+    <a href="/logical-benchs/" class="lb-nav-logo">
+      <img src="/logical-benchs/static/Logical-Brutalism-Logo.svg" alt="Logical Brutalism" style="height:20px;width:auto;display:inline-block;vertical-align:middle;margin-right:var(--space-2);">
+      <span style="color:var(--color-white);">LOGICAL BENCHS</span>
+    </a>
+    <div class="lb-nav-links">
+      <a href="/logical-benchs/" class="lb-nav-link {% block nav_index %}{% endblock %}">Index</a>
+      <a href="https://github.com/matheuslacerda-dev/logical-brutalism" target="_blank" rel="noopener" class="lb-nav-link">Docs</a>
+      <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener" class="lb-nav-link">Benchmarks</a>
+      <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener"
+         class="btn" style="font-size:0.75rem;min-height:36px;padding:var(--space-1) var(--space-3);gap:var(--space-2);display:inline-flex;align-items:center;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+        STAR BENCHMARKS
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 w-full max-w-6xl mx-auto" style="padding:var(--space-5) var(--space-4);">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid var(--color-surface);padding:var(--space-3) var(--space-4);">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+      <span class="font-code text-xs uppercase tracking-wider" style="color:var(--color-text);">
+        Logical Benchs :: Matheus Lacerda :: v1.3
+      </span>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/matheuslacerda-dev/logical-brutalism" target="_blank" rel="noopener"
+           class="font-code text-xs uppercase tracking-wider" style="text-decoration:none;color:var(--color-text);">
+          <span style="color:var(--color-amber);">★</span> Star the Design System
+        </a>
+        <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener"
+           class="font-code text-xs uppercase tracking-wider" style="text-decoration:none;color:var(--color-text);">
+          <span style="color:var(--color-amber);">★</span> Star the Benchmarks
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

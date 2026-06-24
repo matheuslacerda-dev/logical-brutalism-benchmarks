@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}Logical Brutalism :: {{ framework }} / {{ app_name }}{% endblock %}
+{% block title %}Logical Benchs :: {{ framework }} / {{ app_name }}{% endblock %}
 
 {% block content %}
 <div style="max-width:720px;">
 
   <!-- HEADER -->
   <div class="border border-lb-surface" style="padding:var(--space-4);margin-bottom:var(--space-5);">
-    <p class="font-code text-lb-amber text-xs uppercase tracking-widest mb-4" style="letter-spacing:0.2em;">
+    <p class="font-code text-lb-amber text-xs uppercase tracking-widest" style="letter-spacing:0.2em;margin-bottom:var(--space-4);">
       [ SYS_REQ :: LAUNCH BENCHMARK ]
     </p>
 
-    <table class="w-full text-left border-collapse" style="margin-bottom:0;">
+    <table class="w-full text-left border-collapse">
       <tr>
         <th class="font-code text-xs uppercase tracking-wider border border-lb-surface"
             style="padding:var(--space-2) var(--space-3);width:140px;background:var(--color-surface);color:var(--color-amber);">
           Framework
         </th>
-        <td class="font-code text-sm border border-lb-surface"
-            style="padding:var(--space-2) var(--space-3);color:var(--color-white);">
+        <td class="font-code text-sm text-lb-white border border-lb-surface"
+            style="padding:var(--space-2) var(--space-3);">
           {{ framework }}
         </td>
       </tr>
@@ -27,8 +27,8 @@
             style="padding:var(--space-2) var(--space-3);background:var(--color-surface);color:var(--color-amber);">
           Application
         </th>
-        <td class="font-code text-sm border border-lb-surface"
-            style="padding:var(--space-2) var(--space-3);color:var(--color-white);">
+        <td class="font-code text-sm text-lb-white border border-lb-surface"
+            style="padding:var(--space-2) var(--space-3);">
           {{ app_name }}
         </td>
       </tr>
@@ -37,8 +37,8 @@
             style="padding:var(--space-2) var(--space-3);background:var(--color-surface);color:var(--color-amber);">
           Status
         </th>
-        <td class="font-code text-sm border border-lb-surface"
-            style="padding:var(--space-2) var(--space-3);color:var(--color-amber);letter-spacing:0.05em;">
+        <td class="font-code text-sm text-lb-amber border border-lb-surface"
+            style="padding:var(--space-2) var(--space-3);letter-spacing:0.05em;">
           REQUIRES LOCAL EXECUTION
         </td>
       </tr>
@@ -48,28 +48,33 @@
   <!-- DEPLOYMENT SEQUENCE -->
   <div style="margin-bottom:var(--space-5);">
     <h2 class="lb-section-title">Deployment Sequence</h2>
-    <p class="font-struct text-sm mb-4" style="line-height:1.8;color:var(--color-white);">
+    <p class="font-struct text-sm text-lb-white" style="line-height:1.8;margin-bottom:var(--space-4);">
       This benchmark runs as a standalone dev server.
       Open a terminal at the project root and execute the following sequence:
     </p>
 
-    <div class="border border-lb-surface" style="background:var(--color-surface);padding:var(--space-4);">
+    <div x-data="{ copied: false }" class="border border-lb-surface relative" style="background:var(--color-surface);padding:var(--space-4);">
+      <button @click="navigator.clipboard.writeText('cd \'' + '{{ framework }}/{{ app_name }}' + '\' && npm install && npm run dev'); copied = true; setTimeout(() => copied = false, 2000)" 
+              class="absolute font-code text-xs text-lb-amber hover:text-lb-white"
+              style="top:var(--space-2);right:var(--space-2);"
+              x-text="copied ? '[ COPIED ]' : '[ COPY ]'">
+      </button>
       <!-- line 1 -->
       <div style="display:flex;align-items:baseline;gap:var(--space-2);margin-bottom:var(--space-2);">
-        <span class="font-code text-sm" style="color:var(--color-amber);user-select:none;">$</span>
-        <code class="font-code text-sm" style="color:var(--color-white);">cd
-          <span style="color:var(--color-amber);">"{{ framework }}/{{ app_name }}"</span>
+        <span class="font-code text-sm text-lb-amber" style="user-select:none;">$</span>
+        <code class="font-code text-sm text-lb-white">cd
+          <span class="text-lb-amber">"{{ framework }}/{{ app_name }}"</span>
         </code>
       </div>
       <!-- line 2 -->
       <div style="display:flex;align-items:baseline;gap:var(--space-2);margin-bottom:var(--space-2);">
-        <span class="font-code text-sm" style="color:var(--color-amber);user-select:none;">$</span>
-        <code class="font-code text-sm" style="color:var(--color-white);">npm install</code>
+        <span class="font-code text-sm text-lb-amber" style="user-select:none;">$</span>
+        <code class="font-code text-sm text-lb-white">npm install</code>
       </div>
       <!-- line 3 -->
       <div style="display:flex;align-items:baseline;gap:var(--space-2);">
-        <span class="font-code text-sm" style="color:var(--color-amber);user-select:none;">$</span>
-        <code class="font-code text-sm" style="color:var(--color-white);">npm run dev</code>
+        <span class="font-code text-sm text-lb-amber" style="user-select:none;">$</span>
+        <code class="font-code text-sm text-lb-white">npm run dev</code>
       </div>
     </div>
   </div>
@@ -79,26 +84,25 @@
     <h2 class="lb-section-title">Expected Output</h2>
     <div class="border border-lb-surface" style="background:var(--color-surface);padding:var(--space-4);">
       <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-1);">
-        <span class="font-code text-xs" style="color:var(--color-amber);">▸</span>
-        <code class="font-code text-xs" style="color:var(--color-white);">ready in ~2s</code>
+        <span class="font-code text-xs text-lb-amber">▸</span>
+        <code class="font-code text-xs text-lb-white">ready in ~2s</code>
       </div>
       <div style="display:flex;gap:var(--space-2);margin-bottom:var(--space-1);">
-        <span class="font-code text-xs" style="color:var(--color-amber);">▸</span>
-        <code class="font-code text-xs" style="color:var(--color-white);">
-          Local:&nbsp;<span style="color:var(--color-amber);text-decoration:underline;">http://localhost:3000</span>
+        <span class="font-code text-xs text-lb-amber">▸</span>
+        <code class="font-code text-xs text-lb-white">
+          Local:&nbsp;<span class="text-lb-amber" style="text-decoration:underline;">http://localhost:3000</span>
         </code>
       </div>
       <div style="display:flex;gap:var(--space-2);">
-        <span class="font-code text-xs" style="color:var(--color-amber);">▸</span>
-        <code class="font-code text-xs" style="color:var(--color-white);">Network: use <span style="color:var(--color-amber);">--host</span> to expose</code>
+        <span class="font-code text-xs text-lb-amber">▸</span>
+        <code class="font-code text-xs text-lb-white">Network: use <span class="text-lb-amber">--host</span> to expose</code>
       </div>
     </div>
   </div>
 
   <!-- ACTIONS -->
   <div class="flex flex-col sm:flex-row gap-2">
-    <a href="/" class="btn"
-       style="background:transparent;color:var(--color-amber);border:1px solid var(--color-amber);">
+    <a href="/logical-benchs/" class="btn btn-outline">
       ← Return to Index
     </a>
     <a href="https://github.com/matheuslacerda-dev/logical-brutalism" target="_blank" rel="noopener"
@@ -109,7 +113,7 @@
       STAR THE DESIGN SYSTEM
     </a>
     <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener"
-       class="btn" style="gap:var(--space-2);display:inline-flex;align-items:center;background:transparent;color:var(--color-amber);border:1px solid var(--color-amber);">
+       class="btn btn-outline" style="gap:var(--space-2);display:inline-flex;align-items:center;">
       <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
       </svg>
