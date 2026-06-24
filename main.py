@@ -1,24 +1,24 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-import os
+from fastapi.templating import Jinja2Templates
 
-app = FastAPI(title="Logical Brutalism Benchmarks")
+app = FastAPI(title="Logical Benchs Sub-App")
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Mount independent static directory
+app.mount("/static", StaticFiles(directory="static"), name="bench_static")
 
-# Using the root directory for templates
-templates = Jinja2Templates(directory=".")
+# Instantiate templates using the sub-app's template directory
+templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
-async def read_index(request: Request):
-    return templates.TemplateResponse(request=request, name="index.html")
+async def index(request: Request):
+    return templates.TemplateResponse(request, "index.html")
 
 @app.get("/{framework}/{app_name}", response_class=HTMLResponse)
-async def serve_app_instruction(request: Request, framework: str, app_name: str):
-    return templates.TemplateResponse(request=request, name="app_instruction.html", context={"framework": framework, "app_name": app_name})
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+async def benchmark_app(request: Request, framework: str, app_name: str):
+    return templates.TemplateResponse(
+        request, 
+        "app_instruction.html", 
+        {"framework": framework, "app_name": app_name}
+    )

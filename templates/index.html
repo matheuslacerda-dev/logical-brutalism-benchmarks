@@ -285,7 +285,7 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5" style="border:1px solid var(--color-surface);">
     {% for fw in frameworks %}
-    {% set href = "/logical-benchs/" ~ fw.key ~ "/" ~ suite.folder %}
+    {% set href = "/" ~ fw.key ~ "/" ~ suite.folder %}
     <a href="{{ href }}"
        class="group block transition-none border {% if fw.highlight %}border-lb-amber hover:bg-lb-amber{% else %}border-lb-surface hover:border-lb-white hover:bg-lb-white{% endif %}"
        style="padding:var(--space-3) var(--space-4);text-decoration:none;cursor:crosshair;">

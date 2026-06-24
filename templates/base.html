@@ -12,7 +12,7 @@
 
   <!-- [1] TITLE & ICON -->
   <title>{% block title %}Logical Benchs :: Empirical Performance Matrix{% endblock %}</title>
-  <link rel="icon" type="image/svg+xml" href="/logical-benchs/static/Logical-Brutalism-Logo.svg">
+  <link rel="icon" type="image/svg+xml" href="/static/Logical-Brutalism-Logo.svg">
 
   <!-- [2] CRAWLERS & INDEXING -->
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -103,7 +103,7 @@
         },
         {
           "@type": "Dataset",
-          "@id": "https://matheuslacerda.dev/logical-benchs/#dataset",
+          "@id": "https://matheuslacerda.dev/#dataset",
           "name": "Logical Benchs — Empirical Performance Matrix",
           "description": "Empirical benchmarks comparing the Logical Brutalism stack against Virtual DOM SPAs under high-density B2B stress.",
           "url": "https://matheuslacerda.dev/logical-benchs",
@@ -131,11 +131,11 @@
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
   <!-- Central Visual Matrix -->
-  <link rel="stylesheet" href="/logical-benchs/static/css/logical-brutalism.css">
+  <link rel="stylesheet" href="/static/css/logical-brutalism.css">
 
   <!-- Tailwind Hook with Brutalist Plugin -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/logical-benchs/static/js/logical-brutalism-tailwind.js"></script>
+  <script src="/static/js/logical-brutalism-tailwind.js"></script>
 
   <script>
     tailwind.config = {
@@ -180,12 +180,12 @@
 
   <!-- NAV -->
   <nav class="lb-nav" style="position:sticky;top:0;z-index:50;">
-    <a href="/logical-benchs/" class="lb-nav-logo">
-      <img src="/logical-benchs/static/Logical-Brutalism-Logo.svg" alt="Logical Brutalism" style="height:20px;width:auto;display:inline-block;vertical-align:middle;margin-right:var(--space-2);">
+    <a href="/" class="lb-nav-logo">
+      <img src="/static/Logical-Brutalism-Logo.svg" alt="Logical Brutalism" style="height:20px;width:auto;display:inline-block;vertical-align:middle;margin-right:var(--space-2);">
       <span style="color:var(--color-white);">LOGICAL BENCHS</span>
     </a>
     <div class="lb-nav-links">
-      <a href="/logical-benchs/" class="lb-nav-link {% block nav_index %}{% endblock %}">Index</a>
+      <a href="/" class="lb-nav-link {% block nav_index %}{% endblock %}">Index</a>
       <a href="https://github.com/matheuslacerda-dev/logical-brutalism" target="_blank" rel="noopener" class="lb-nav-link">Docs</a>
       <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener" class="lb-nav-link">Benchmarks</a>
       <a href="https://github.com/matheuslacerda-dev/logical-brutalism-benchmarks" target="_blank" rel="noopener"

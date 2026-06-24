@@ -105,6 +105,23 @@ img, svg, video, canvas, audio, iframe, embed, object {
   color: var(--color-void);
 }
 
+/* 4.1. COMPONENT: BUTTON OUTLINE */
+.btn-outline {
+  background: transparent;
+  color: var(--color-amber);
+  border: 1px solid var(--color-amber);
+}
+
+.btn-outline:hover {
+  background: var(--color-amber) !important;
+  color: var(--color-void) !important;
+}
+
+.btn-outline:active {
+  background: var(--color-amber) !important;
+  color: var(--color-void) !important;
+}
+
 .btn:disabled {
   background: transparent;
   color: var(--color-text);
@@ -220,4 +237,13 @@ img, svg, video, canvas, audio, iframe, embed, object {
     width: 100%;
     padding: var(--space-2) 0;
   }
+}
+
+/* 8. COMPONENT: BENCHMARK CARD (GRID) */
+.lb-bench-card {
+  transition: none !important;
+}
+
+.lb-bench-card:hover {
+  background: var(--color-surface) !important;
 }
